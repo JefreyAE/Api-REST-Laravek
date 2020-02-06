@@ -43,8 +43,8 @@ class UserController extends Controller {
             } else {
                 //Si la validación es correcta.
                 //Cifrar la contraseña
-                $pwd = password_hash($params->password, PASSWORD_BCRYPT, ['cost'=> 4]);
-                
+                $pwd = password_hash($params->password, PASSWORD_BCRYPT, ['cost' => 4]);
+
                 //Crear el usuario    
                 $user = new User();
                 $user->name = $params_array['name'];
@@ -52,15 +52,16 @@ class UserController extends Controller {
                 $user->email = $params_array['email'];
                 $user->password = $pwd;
                 $user->role = 'ROLE_USER';
-                
+
                 //Guarda en la base de datos
                 $user->save();
-                
+
                 $data = array(
                     'status' => 'success',
                     'code' => 200,
-                    'message' => 'El usuario se a creado correctamente.'
-                );
+                    'message' => 'El usuario se a creado correctamente.',
+                    'user'=>$user
+                    );
             }
         } else {
             $data = array(
